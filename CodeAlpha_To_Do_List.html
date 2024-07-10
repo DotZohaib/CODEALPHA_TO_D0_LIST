@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+ <style>
+    body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+}
+
+.container {
+    text-align: center;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+form {
+    margin-bottom: 1rem;
+}
+
+input[type="text"] {
+    padding: 0.5rem;
+    font-size: 1rem;
+    margin-right: 1rem;
+    width: 70%;
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border: none;
+    background: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: white;
+    color: #007bff;
+    border: 1px solid #007bff;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #ddd;
+}
+
+li button {
+    background: none;
+    border: none;
+    color: #007bff;
+    cursor: pointer;
+}
+
+li button:hover {
+    color: white;
+    background-color: #0056b3;
+
+}
+
+ </style>
+<body>
+    <div class="container">
+        <h1>To-Do List</h1>
+        <form id="todoForm">
+            <input type="text" id="newTask" placeholder="Add a new task" required>
+            <button type="button" onclick="addTask()">Add Task</button>
+        </form>
+        <ul id="todoList"></ul>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        function addTask() {
+    const newTaskInput = document.getElementById('newTask');
+    const taskText = newTaskInput.value.trim();
+
+    if (taskText === "") {
+        alert("Please enter a task.");
+        return;
+    }
+
+    const taskList = document.getElementById('todoList');
+    const listItem = document.createElement('li');
+
+    listItem.innerHTML = `
+        <span>${taskText}</span>
+        <button onclick="removeTask(this)">Remove</button>
+    `;
+
+    taskList.appendChild(listItem);
+    newTaskInput.value = "";
+}
+
+function removeTask(button) {
+    const taskList = document.getElementById('todoList');
+    const listItem = button.parentElement;
+    taskList.removeChild(listItem);
+}
+
+    </script>
+</body>
+</html>
